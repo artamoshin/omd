@@ -6,6 +6,19 @@ class Element:
         self.next = None
 
 
+class ListIterator:
+    def __init__(self, collection):
+        self.cursor = collection.head
+
+    def __next__(self):
+        if self.cursor is None:
+            raise StopIteration
+
+        value = self.cursor.value
+        self.cursor = self.cursor.next
+        return value
+
+
 class Stack:
     def __init__(self):
         self.last = None
@@ -51,16 +64,7 @@ class List:
         self.tail = element
 
     def __iter__(self):
-        self.cursor = self.head
-        return self
-
-    def __next__(self):
-        if self.cursor is None:
-            raise StopIteration
-
-        value = self.cursor.value
-        self.cursor = self.cursor.next
-        return value
+        return ListIterator(self)
 
     def print(self):
         return ' '.join(map(str, self))
