@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from .linked_list import List, Stack
+from .linked_list import List
 
 
 class TestList(TestCase):
@@ -49,23 +49,3 @@ class TestList(TestCase):
     def test_none_value(self):
         list_with_single_none_element = List(None)
         self.assertEqual(list_with_single_none_element.print(), 'None')
-
-
-class TestStack(TestCase):
-    def test_samples(self):
-        stack = Stack()
-        stack.push(1)
-        stack.push(2)
-        stack.push(3)
-        self.assertEqual(stack.pop(), 3)
-        self.assertEqual(stack.pop(), 2)
-        self.assertEqual(stack.pop(), 1)
-        with self.assertRaises(IndexError):
-            stack.pop()
-
-    def test_pop_all(self):
-        stack = Stack()
-        stack.push(1)
-        stack.push(2)
-        stack.push(3)
-        self.assertEqual(list(stack.pop_all()), [3, 2, 1])
