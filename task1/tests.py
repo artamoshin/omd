@@ -28,6 +28,16 @@ class TestList(TestCase):
         list_ = List(*range(1, 9))
         self.assertEqual([2 ** elem for elem in list_], [2, 4, 8, 16, 32, 64, 128, 256])
 
+    def test_multiple_iterators(self):
+        list_ = List(1, 2, 3)
+        iterator1 = iter(list_)
+        iterator2 = iter(list_)
+
+        self.assertEqual(next(iterator1), 1)
+        self.assertEqual(next(iterator1), 2)
+        self.assertEqual(next(iterator2), 1)
+        self.assertEqual(next(iterator1), 3)
+
     def test_print_reversed(self):
         list_ = List(*range(1, 9))
         self.assertEqual(list_.print_reversed(), '8 7 6 5 4 3 2 1')
